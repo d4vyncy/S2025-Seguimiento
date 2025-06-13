@@ -2,7 +2,7 @@ import { Routes } from "@angular/router";
 import { HomeComponent } from "./pages/home-component/home-component";
 import { AboutComponent } from "./pages/about-component/about-component";
 import { NoAutorizadoComponent } from "./no-autorizado/no-autorizado";
-import { SharedLayoutComponent } from "../layouts/shared-layout-component/shared-layout-component";
+import { SharedLayoutComponent } from "./layouts/shared-layout-component/shared-layout-component";
 
 
 export const sharedRoutes: Routes = [
