@@ -1,0 +1,45 @@
+# Enable rewrite engine and route requests to framework
+RewriteEngine On
+
+# Some servers require you to specify the `RewriteBase` directive
+# In such cases, it should be the path (relative to the document root)
+# containing this .htaccess file
+#
+# RewriteBase /
+
+RewriteRule ^(app|tmp)\/|\.ini$ - [R=404]
+
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .* index.php [L,QSA]
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php72” package as the default “PHP” programming language.
+# <IfModule mime_module>
+#   AddHandler application/x-httpd-ea-php74 .php .php7 .phtml
+# </IfModule>
+
+# Bloquear acceso por defecto y permitir solo IPs de Bolivia
+Order Deny,Allow
+Deny from all
+
+# Permitir IPs de Bolivia (Agrega los rangos de IPs para Bolivia)
+Allow from 200.100.0.0/16
+Allow from 181.112.0.0/16
+Allow from 190.216.0.0/16
+# Agrega más rangos de IPs para Bolivia según sea necesario
+
+# Permitir IPs específicas de Entel u otras IPs
+Allow from 181.0.0.0/8   # IP específica
+Allow from 192.0.0.0/8      # Rango de IP de Entel, ajusta según sea necesario
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "https://serv.sereci-santacruz.com"
+    Header set Access-Control-Allow-Origin "https://observer.sereci-santacruz.com"
+    Header set Access-Control-Allow-Origin "https://sereci-santacruz.com"
+    Header set Access-Control-Allow-Origin "https://salaespera.sereci-santacruz.com/"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>
